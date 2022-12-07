@@ -181,3 +181,12 @@ def api_show_sale(request, pk):
         count, _ = Sale.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
+@require_http_methods(["GET"])
+def api_sales_by_salesperson(request,employee_number):
+    salesperson = SalesPerson.objects.get(employee_number=employee_number)
+    sales_by_salesperson = Sale.objects.filter(salesperson=salesperson)
+    return JsonResponse(
+        sales_by_salesperson,
+        encoder=SaleListEncoder,
+        safe=False
+    )
