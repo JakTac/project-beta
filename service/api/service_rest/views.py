@@ -132,3 +132,13 @@ def api_show_appointment(request, pk):
             encoder=AppointmentEncoder,
             safe=False,
         )
+
+@require_http_methods(["GET"])
+def api_appointments_by_vin(request,vin):
+    automobile = AutomobileVO.objects.get(vin=vin)
+    appointments = Appointment.objects.filter(automobile=automobile)
+    return JsonResponse(
+        appointments,
+        encoder=AppointmentEncoder,
+        safe=False,
+    )
