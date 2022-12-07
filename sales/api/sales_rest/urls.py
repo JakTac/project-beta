@@ -7,6 +7,6 @@ urlpatterns = [
     path("customer/", api_list_customers, name="api_create_customer"),
     path("customer/<int:pk>/", api_show_customer, name="api_show_customer"),
     path("sales/", api_list_sales, name="api_create_sales"),
-    path("sales_person/<int:salesperson_vo_id>/sales/", api_list_sales, name="api_list_sales"),
+    path("sales_person/<int:pk>/sales/", api_list_sales, name="api_list_sales"),
     path("sales/<int:pk>/", api_show_sale, name="api_show_sale"),
 ]

@@ -11,7 +11,7 @@ class SalesPerson(models.Model):
     employee_number = models.IntegerField(unique=True)
 
     def get_api_url(self):
-        return reverse("api_sales_person", kwargs={"pk": self.id})
+        return reverse("api_sales_person", kwargs={"pk": self.employee_number})
 
 
 class Customer(models.Model):

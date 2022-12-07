@@ -16,6 +16,7 @@ class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
         "name",
+        "employee_number",
         "id",
     ]
 
@@ -55,9 +56,9 @@ class SaleListEncoder(ModelEncoder):
     ]
 
     encoders = {
-        "automobile": AutoMobileVODetailEncoder,
-        "salesperson": SalesPersonDetailEncoder,
-        "customer": CustomerDetailEncoder,
+        "automobile": AutoMobileVODetailEncoder(),
+        "salesperson": SalesPersonDetailEncoder(),
+        "customer": CustomerDetailEncoder(),
     }
 
 @require_http_methods(["GET", "POST"])
@@ -70,7 +71,6 @@ def api_list_sales_person(request):
         )
     else:
         content = json.loads(request.body)
-        print(content)
         salesperson = SalesPerson.objects.create(**content)
         return JsonResponse(
             salesperson,
@@ -81,14 +81,14 @@ def api_list_sales_person(request):
 @require_http_methods(["GET", "DELETE"])
 def api_show_sales_person(request, pk):
     if request.method == "GET":
-        salesperson = SalesPerson.objects.get(id = pk)
+        salesperson = SalesPerson.objects.get(employee_number = pk)
         return JsonResponse(
             salesperson,
             encoder=SalesPersonDetailEncoder,
             safe=False
         )
     else:
-        count, _ = SalesPerson.objects.filter(id=pk).delete()
+        count, _ = SalesPerson.objects.filter(employee_number=pk).delete()
         return JsonResponse({"deleted": count > 0})
 
 
@@ -124,10 +124,12 @@ def api_show_customer(request, pk):
         return JsonResponse({"deleted": count > 0})
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales(request, salesperson_vo_id=None):
+def api_list_sales(request, pk=None):
     if request.method == "GET":
-        if salesperson_vo_id is not None:
-            sales = Sale.objects.filter(salesperson=salesperson_vo_id)
+        if pk is not None:
+            print(pk)
+            print(Sale.objects.all().values())
+            sales = Sale.objects.filter(salesperson=pk)
         else:
             sales = Sale.objects.all()
         return JsonResponse(
@@ -147,12 +149,12 @@ def api_list_sales(request, salesperson_vo_id=None):
                 satus=400,
             )
         try:
-            salesperson_id = content["salesperson"]
-            salesperson = SalesPerson.objects.get(id=salesperson_id)
+            employee_number = content["salesperson"]
+            salesperson = SalesPerson.objects.get(employee_number=employee_number)
             content['salesperson'] = salesperson
         except SalesPerson.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid employee id"},
+                {"message": "Invalid employee number"},
                 status=400
             )
         try:
@@ -177,7 +179,7 @@ def api_show_sale(request, pk):
         sale = Sale.objects.get(id=pk)
         return JsonResponse(
             sale,
-            SaleListEncoder,
+            encoder=SaleListEncoder,
             safe=False,
         )
     else:
