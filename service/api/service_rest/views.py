@@ -28,8 +28,8 @@ class AppointmentEncoder(ModelEncoder):
         "id",
         "date",
         "time",
-        "owner",
         "reason",
+        "customer",
         "completed",
         "technician",
         "automobile",
@@ -50,12 +50,24 @@ def api_list_technicians(request):
         )
     else:
         content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianEncoder,
-            safe=False,
-        )
+        print(content)
+        try:
+            employee_number = content['employee_number']
+            print(f"This is the the employee number: {employee_number}")
+            employee = Technician.objects.get(employee_number=employee_number)
+            if employee:
+                return JsonResponse(
+                    {"message": "That employee already exists. Please enter a unique number"}
+                )
+        except Technician.DoesNotExist:
+                print("Did not find an employee with this number")
+                technician = Technician.objects.create(**content)
+                return JsonResponse(
+                    technician,
+                    encoder=TechnicianEncoder,
+                    safe=False,
+                )
+
 
 
 

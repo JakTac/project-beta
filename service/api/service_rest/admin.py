@@ -15,8 +15,8 @@ class AppointmentAdmin(admin.ModelAdmin):
     list_display = [
         "date",
         "time",
-        "owner",
         "reason",
+        "customer",
         "completed",
         "technician",
         "automobile",

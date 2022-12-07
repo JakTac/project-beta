@@ -17,7 +17,7 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    owner = models.CharField(max_length=50)
+    customer = models.CharField(max_length=50)
     date = models.DateField(auto_now_add=False, null=True)
     time = models.TimeField(auto_now_add=False, null=True)
     reason = models.CharField(max_length=250)
