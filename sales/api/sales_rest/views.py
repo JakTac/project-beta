@@ -124,14 +124,9 @@ def api_show_customer(request, pk):
         return JsonResponse({"deleted": count > 0})
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales(request, pk=None):
+def api_list_sales(request):
     if request.method == "GET":
-        if pk is not None:
-            print(pk)
-            print(Sale.objects.all().values())
-            sales = Sale.objects.filter(salesperson=pk)
-        else:
-            sales = Sale.objects.all()
+        sales = Sale.objects.all()
         return JsonResponse(
             {"sales": sales},
             encoder=SaleListEncoder,
@@ -185,3 +180,4 @@ def api_show_sale(request, pk):
     else:
         count, _ = Sale.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
+
