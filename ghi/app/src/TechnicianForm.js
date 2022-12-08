@@ -23,21 +23,21 @@ function CreateTechnician (props) {
             body: JSON.stringify(details),
         }
         fetch(techniciansUrl, requestOptions)
-        .then(res => {
-            return res.json();
-        })
-        .then(result => {
-            try {
-                console.log(result)
-                if (JSON.stringify(result).id != undefined > 0) {
-                    window.alert("Technician was created.")
-                } else {
-                    window.alert("Something went wrong. Technician was not created.")
+            .then(res => {
+                return res.json();
+            })
+            .then(result => {
+                try {
+                    console.log(result)
+                    if (JSON.stringify(result).id != undefined > 0) {
+                        window.alert("Technician was created.")
+                    } else {
+                        window.alert("Something went wrong. Technician was not created.")
+                    }
+                } catch {
+                    console.error("Something went wrong. Technician was not created")
                 }
-            } catch {
-                console.error("Something went wrong. Technician was not created")
-            }
-        })
+            })
     }
 
     return (

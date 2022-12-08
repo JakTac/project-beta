@@ -14,6 +14,7 @@ class AutomobileVOEncoder(ModelEncoder):
         "import_href",
     ]
 
+
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
@@ -22,22 +23,24 @@ class TechnicianEncoder(ModelEncoder):
         "employee_number",
     ]
 
+
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "id",
+        "vin",
+        "vip",
         "date",
         "time",
         "reason",
         "customer",
         "completed",
         "technician",
-        "automobile",
     ]
     encoders = {
-        "automobile": AutomobileVOEncoder(),
         "technician": TechnicianEncoder(),
     }
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
@@ -69,8 +72,6 @@ def api_list_technicians(request):
                 )
 
 
-
-
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request, automobile_vo_id=None):
     if request.method == "GET":
@@ -86,15 +87,6 @@ def api_list_appointments(request, automobile_vo_id=None):
     else:
         content = json.loads(request.body)
         print(content)
-        try:
-            automobile_vin = content['automobile']
-            automobile = AutomobileVO.objects.get(vin=automobile_vin)
-            content['automobile'] = automobile
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse(
-                {"message": 'Invalid vin'},
-                status=400,
-            )
         try:
             technician_employee_number = content['technician']
             technician = Technician.objects.get(employee_number=technician_employee_number)
@@ -132,6 +124,7 @@ def api_show_appointment(request, pk):
             encoder=AppointmentEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["GET"])
 def api_appointments_by_vin(request,vin):

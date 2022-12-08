@@ -22,17 +22,12 @@ class Appointment(models.Model):
     time = models.TimeField(auto_now_add=False, null=True)
     reason = models.CharField(max_length=250)
     completed = models.BooleanField(default=False)
+    vip = models.BooleanField(default=False)
+    vin = models.CharField(max_length=17, null=True)
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
         on_delete=models.CASCADE,
-    )
-
-    automobile = models.ForeignKey(
-        AutomobileVO,
-        related_name='appointments',
-        on_delete=models.CASCADE,
-        null=True,
     )
 
     def __str__(self):
