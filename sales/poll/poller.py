@@ -20,7 +20,7 @@ def get_automobiles():
             vin=automobile['vin'],
             defaults={"vin": automobile["vin"]},
         )
-        print(AutoMobileVO.objects.all().values())
+        # print(AutoMobileVO.objects.all().values())
 
 def poll():
     while True:
@@ -29,7 +29,7 @@ def poll():
             get_automobiles()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(5)
+        time.sleep(20)
 
 
 if __name__ == "__main__":

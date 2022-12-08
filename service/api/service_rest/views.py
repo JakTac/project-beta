@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 
 from common.json import ModelEncoder
-from .models import Technician, Appointment, AutomobileVO
+from .models import Technician, Appointment, AutomobileVO, AppointmentHistory
 
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -114,9 +114,17 @@ def api_show_appointment(request, pk):
         )
     elif request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=pk).delete()
-        return JsonResponse({"deleted": count > 0})
+        appointments = Appointment.objects.all()
+        if count > 0:
+            return JsonResponse(
+                appointments,
+                encoder=AppointmentEncoder,
+                safe=False
+            )
     else:
         content = json.loads(request.body)
+        technician_id = content['technician']['id']
+        content['technician'] = technician_id
         Appointment.objects.filter(id=pk).update(**content)
         appointment = Appointment.objects.get(id=pk)
         return JsonResponse(
@@ -128,8 +136,16 @@ def api_show_appointment(request, pk):
 
 @require_http_methods(["GET"])
 def api_appointments_by_vin(request,vin):
-    automobile = AutomobileVO.objects.get(vin=vin)
-    appointments = Appointment.objects.filter(automobile=automobile)
+    appointments = Appointment.objects.filter(vin=vin)
+    return JsonResponse(
+        appointments,
+        encoder=AppointmentEncoder,
+        safe=False,
+    )
+
+@require_http_methods(["GET"])
+def api_appointment_history(request,vin):
+    appointments = AppointmentHistory.objects.filter(vin=vin)
     return JsonResponse(
         appointments,
         encoder=AppointmentEncoder,

@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CreateAppointment (props) {
+    let navigate = useNavigate()
     const initialState = {
         vin: '',
         vip: false,
@@ -33,7 +35,7 @@ function CreateAppointment (props) {
     function checkForVIP(details, automobiles) {
         let result = false
         return automobiles.map(auto => {
-            if (auto.vin == details.vin) {
+            if (auto.vin === details.vin) {
                 result = true
             }
             return result
@@ -68,8 +70,9 @@ function CreateAppointment (props) {
         .then(result => {
             console.log(result)
             try {
-                if (JSON.stringify(result).id != undefined > 0) {
+                if (result.id !== undefined) {
                     window.alert("Appointment was created.")
+                    navigate("/appointments")
                 } else {
                     window.alert("Something went wrong. Appointment was not created.")
                 }
