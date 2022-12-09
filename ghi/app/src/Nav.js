@@ -16,6 +16,9 @@ function Nav() {
             <li className='nav-item'>
               <NavLink className='nav-link active' aria-current='page' to='/appointments/new'>Create an Appointment</NavLink>
             </li>
+            <li className='nav-item'>
+              <NavLink className='nav-link active' aria-current='page' to='/appointments'>List Appointments</NavLink>
+            </li>
           </ul>
         </div>
       </div>

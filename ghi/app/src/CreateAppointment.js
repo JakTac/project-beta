@@ -53,7 +53,6 @@ function CreateAppointment (props) {
         e.preventDefault()
         const [vipStatus] = checkForVIP(details, automobiles)
         details.vip = vipStatus
-        console.log(`vipstatus: ${vipStatus}`)
         delete details.technicians
         const appointmentsUrl = 'http://localhost:8080/api/appointments/'
         const requestOptions = {
@@ -68,7 +67,6 @@ function CreateAppointment (props) {
             return res.json();
         })
         .then(result => {
-            console.log(result)
             try {
                 if (result.id !== undefined) {
                     window.alert("Appointment was created.")
@@ -96,7 +94,7 @@ function CreateAppointment (props) {
                                 <label htmlFor="customer">Customer</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handleChange} placeholder="vin"
+                                <input onChange={handleChange} placeholder="vin" maxLength="17"
                                 required type="text" name="vin" id="vin" className="form-control" />
                                 <label htmlFor="vin">VIN Number</label>
                             </div>
@@ -106,9 +104,9 @@ function CreateAppointment (props) {
                                 <label htmlFor="date">Date</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handleChange} placeholder="time"
+                                <input onChange={handleChange} placeholder="time" min="09:00" max="17:00"
                                 required type="time" name="time" id="time" className="form-control" />
-                                <label htmlFor="time">Time</label>
+                                <label htmlFor="time">Time (Can schedule from 9am to 5pm)</label>
                             </div>
                             <div className="form-floating mb-3">
                                 <textarea onChange={handleChange} placeholder="reason" rows="3"
@@ -123,7 +121,7 @@ function CreateAppointment (props) {
                                             <option key={technician.id} value={technician.employee_number}>
                                                 {technician.name}
                                             </option>
-                                         )
+                                        )
                                     })}
                                 </select>
                             </div>
