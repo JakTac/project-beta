@@ -1,4 +1,6 @@
 import { React, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import SearchBar from './SearchBar'
 
 function ListAppointments() {
     const [appointments, setAppointments] = useState(null)
@@ -63,28 +65,11 @@ function ListAppointments() {
     }
 
 
-    const onChange = (event) => {
-        setValue(event.target.value)
-    }
-
-
-    const onSearch = (searchItem) => {
-        console.log("search ", searchItem)
-    }
-
-
     return (
         <>
+            <SearchBar />
             {appointments &&
                 <div>
-                    <div>
-                        <p> </p>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="VIN" value={value}
-                        aria-label="Recipient's username" aria-describedby="button-addon2" />
-                        <button className="btn btn-primary" type="button" id="button-addon2">Search</button>
-                    </div>
-                    </div>
                     <table className="table">
                         <thead>
                             <tr>
@@ -103,15 +88,17 @@ function ListAppointments() {
                                     return (
                                         <tr key={appointment.id}>
                                             <th scope="row">VIP</th>
-                                            <td>{appointment.vin}</td>
+                                            <td>
+                                                <Link to={`/${appointment.vin}/history/`}>{appointment.vin}</Link>
+                                            </td>
                                             <td>{appointment.customer}</td>
                                             <td>{appointment.date}</td>
-                                            <td>{appointment.time.slice(0, -2)}</td>
+                                            <td>{appointment.time.slice(0, -3)}</td>
                                             <td>{appointment.technician.name}</td>
                                             <td>{appointment.reason}</td>
                                             <td>
                                                 <button type="button" className="btn btn-success"
-                                                onClick={() => { handleFinished(appointment) }}>Finished</button>
+                                                    onClick={() => { handleFinished(appointment) }}>Finished</button>
                                             </td>
                                             <td>
                                                 <button type="button" className="btn btn-danger"
@@ -123,7 +110,9 @@ function ListAppointments() {
                                     return (
                                         <tr key={appointment.id}>
                                             <th scope="row"></th>
-                                            <td>{appointment.vin}</td>
+                                            <td>
+                                                <Link to={`/${appointment.vin}/history/`}>{appointment.vin}</Link>
+                                            </td>
                                             <td>{appointment.customer}</td>
                                             <td>{appointment.date}</td>
                                             <td>{appointment.time.slice(0, -3)}</td>
