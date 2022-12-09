@@ -10,11 +10,29 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='/technicians/new'>Create Technician</NavLink>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='/appointments/new'>Create an Appointment</NavLink>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/manufacturers/">Add a Manufacturer</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/models/">Add a Vehicle model</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/automobiles/">Add a Automobile</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/salesperson/">Add a Salesperson</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/customer/">Add a customer</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/sale/">Record a sale</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/sales/">List sales</NavLink>
             </li>
             <li className='nav-item'>
               <NavLink className='nav-link active' aria-current='page' to='/appointments'>List Appointments</NavLink>

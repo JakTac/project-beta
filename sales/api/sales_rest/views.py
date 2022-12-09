@@ -10,6 +10,7 @@ class AutoMobileVODetailEncoder(ModelEncoder):
     properties = [
         "vin",
         "import_href",
+        "sold",
     ]
 
 class SalesPersonListEncoder(ModelEncoder):
@@ -61,12 +62,20 @@ class SaleListEncoder(ModelEncoder):
         "customer": CustomerDetailEncoder(),
     }
 
+@require_http_methods(["GET"])
+def api_list_automobilesvo(request):
+    autos = AutoMobileVO.objects.all()
+    return JsonResponse(
+        {"autos": autos},
+        encoder = AutoMobileVODetailEncoder,
+    )
+
 @require_http_methods(["GET", "POST"])
 def api_list_sales_person(request):
     if request.method == "GET":
         salespeople = SalesPerson.objects.all()
         return JsonResponse(
-            {"Sales people": salespeople},
+            {"salespeople": salespeople},
             encoder=SalesPersonListEncoder,
         )
     else:
@@ -97,7 +106,7 @@ def api_list_customers(request):
     if request.method == "GET":
         customers = Customer.objects.all()
         return JsonResponse(
-            {"Customers": customers},
+            {"customers": customers},
             encoder=CustomerListEncoder,
         )
     else:
@@ -124,14 +133,9 @@ def api_show_customer(request, pk):
         return JsonResponse({"deleted": count > 0})
 
 @require_http_methods(["GET", "POST"])
-def api_list_sales(request, pk=None):
+def api_list_sales(request):
     if request.method == "GET":
-        if pk is not None:
-            print(pk)
-            print(Sale.objects.all().values())
-            sales = Sale.objects.filter(salesperson=pk)
-        else:
-            sales = Sale.objects.all()
+        sales = Sale.objects.all()
         return JsonResponse(
             {"sales": sales},
             encoder=SaleListEncoder,
@@ -142,6 +146,8 @@ def api_list_sales(request, pk=None):
         try:
             automobile_vin = content['automobile']
             automobile = AutoMobileVO.objects.get(vin=automobile_vin)
+            automobile.sold = True
+            automobile.save()
             content['automobile'] = automobile
         except AutoMobileVO.DoesNotExist:
             return JsonResponse(
@@ -187,11 +193,12 @@ def api_show_sale(request, pk):
         return JsonResponse({"deleted": count > 0})
 
 @require_http_methods(["GET"])
-def api_sales_by_salesperson(request,employee_number):
-    salesperson = SalesPerson.objects.get(employee_number=employee_number)
-    sales_by_salesperson = Sale.objects.filter(salesperson=salesperson)
-    return JsonResponse(
-        sales_by_salesperson,
-        encoder=SaleListEncoder,
-        safe=False
-    )
+def api_sales_by_salesperson(request, employee_number):
+    if request.method == "GET":
+        salesperson = SalesPerson.objects.get(employee_number=employee_number)
+        sales_by_salesperson = Sale.objects.filter(salesperson=salesperson)
+        return JsonResponse(
+            sales_by_salesperson,
+            encoder=SaleListEncoder,
+            safe=False
+        )
