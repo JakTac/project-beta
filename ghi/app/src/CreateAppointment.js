@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 function CreateAppointment (props) {
     let navigate = useNavigate()
+
     const initialState = {
         vin: '',
         vip: false,
@@ -13,9 +14,11 @@ function CreateAppointment (props) {
         completed: false,
         technicians: [],
     }
+
     const [details, setDetails] = useState(initialState)
     const [technicians, setTechnicians] = useState(null)
     const [automobiles, setAutomobiles] = useState(null)
+
 
     useEffect(() => {
         Promise.all([
@@ -42,12 +45,14 @@ function CreateAppointment (props) {
         })
     }
 
+
     const handleChange = (e) => {
         const {name, value} = e.target
         setDetails((prev) => {
             return {...prev, [name]: value}
         })
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -80,6 +85,7 @@ function CreateAppointment (props) {
         })
     }
 
+
     return (
         <>
             {technicians &&
@@ -109,7 +115,7 @@ function CreateAppointment (props) {
                                 <label htmlFor="time">Time (Can schedule from 9am to 5pm)</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <textarea onChange={handleChange} placeholder="reason" rows="3"
+                                <textarea onChange={handleChange} placeholder="reason" style={{height: "100px"}}
                                 required name="reason" id="reason" className="form-control" />
                                 <label htmlFor="reason">Reason for visit</label>
                             </div>
