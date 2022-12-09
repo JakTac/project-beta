@@ -13,11 +13,13 @@ class AutomobileVOAdmin(admin.ModelAdmin):
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = [
+        "vin",
+        "vip",
         "date",
         "time",
         "reason",
         "customer",
         "completed",
         "technician",
-        "automobile",
+        # "automobile",
     ]
