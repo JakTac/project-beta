@@ -29,7 +29,7 @@ class SalespersonForm extends React.Component {
         delete data.employeeNumber
         console.log(data)
 
-        const salespersonUrl = 'http://localhost:8090/api/sales_person/'
+        const salespersonUrl = 'http://localhost:8090/api/salesperson/'
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify(data),

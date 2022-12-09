@@ -24,7 +24,6 @@ def get_autos():
             vin=auto['vin'],
             defaults={"vin": auto["vin"]},
         )
-    # print(AutomobileVO.objects.all().values())
 
 def poll():
     while True:

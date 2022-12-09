@@ -7,7 +7,8 @@ import AutomobileForm from './AutomobileForm';
 import SalespersonForm from './SalespersonForm';
 import Customer1Form from './Customer1Form';
 import SaleForm from './SaleForm';
-
+import SalesList from './SalesList';
+import SalespersonSales from './SalespersonSales';
 
 function App() {
   return (
@@ -19,9 +20,11 @@ function App() {
           <Route path="/manufacturers/" element={<ManufacturerForm />} />
           <Route path="/models/" element={<ModelForm />} />
           <Route path="/automobiles/" element={<AutomobileForm />} />
-          <Route path="/sales_person/" element={<SalespersonForm />} />
+          <Route path="/salesperson/" element={<SalespersonForm />} />
           <Route path="/customer/" element={<Customer1Form />} />
-          <Route path="/sales/" element={<SaleForm />} />
+          <Route path="/sale/" element={<SaleForm />} />
+          <Route path="/sales/" element={<SalesList />} />
+          <Route path="/sales/salesperson/:id/" element={<SalespersonSales />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -78,7 +78,7 @@ class SaleForm extends React.Component {
 
     async componentDidMount() {
         const automobileUrl = 'http://localhost:8090/api/autos/'
-        const salespersonUrl = 'http://localhost:8090/api/sales_person/'
+        const salespersonUrl = 'http://localhost:8090/api/salesperson/'
         const customer1Url = 'http://localhost:8090/api/customer/'
 
         const autoResponse = await fetch(automobileUrl)
@@ -140,7 +140,7 @@ class SaleForm extends React.Component {
                                 <option value="">Choose a customer</option>
                                 {this.state.customers.map(customer => {
                                     return (
-                                        <option value={customer.id} key={customer.name}>
+                                        <option value={customer.id} key={customer.id}>
                                             {customer.name}
                                         </option>
                                     );
