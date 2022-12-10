@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import ListTechnicians from './ListTechnicians';
 import CreateTechnician from './TechnicianForm'
 import CreateAppointment from './CreateAppointment'
 import ListAppointments from './ListAppointments'
@@ -22,6 +23,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/technicians" element={<ListTechnicians />} />
           <Route path="/technicians/new" element={<CreateTechnician />} />
           <Route path="/:id/history/" element={<VinHistory />} />
           <Route path="/appointments/new" element={<CreateAppointment />} />

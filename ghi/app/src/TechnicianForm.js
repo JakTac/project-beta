@@ -1,6 +1,8 @@
 import { React, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CreateTechnician (props) {
+    let navigate = useNavigate()
     const initialState = {
         name: '',
         employee_number: '',
@@ -31,6 +33,7 @@ function CreateTechnician (props) {
                     console.log(result)
                     if (JSON.stringify(result).id != undefined > 0) {
                         window.alert("Technician was created.")
+                        navigate("/technicians")
                     } else {
                         window.alert("Something went wrong. Technician was not created.")
                     }

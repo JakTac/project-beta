@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CreateAppointment (props) {
+function CreateAppointment () {
     let navigate = useNavigate()
+
 
     const initialState = {
         vin: '',
@@ -14,6 +15,7 @@ function CreateAppointment (props) {
         completed: false,
         technicians: [],
     }
+
 
     const [details, setDetails] = useState(initialState)
     const [technicians, setTechnicians] = useState(null)
