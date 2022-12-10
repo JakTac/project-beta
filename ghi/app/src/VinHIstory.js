@@ -14,7 +14,6 @@ function VinHistory() {
                 return res.json()
             })
             .then(data => {
-                console.log(data)
                 setAppointments(data)
             })
     }, [])

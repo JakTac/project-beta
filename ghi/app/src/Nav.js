@@ -1,5 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
+
+const styles = {
+  marginRight: "10px",
+  padding: "10px"
+}
+
+
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -13,29 +20,62 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/manufacturers/">Add a Manufacturer</NavLink>
+            <li style={{styles}}>
+              <div className="dropdown">
+                <a className="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Service
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <NavLink className='dropdown-item' aria-current='page' to='/appointments'>List Appointments</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className='dropdown-item' aria-current='page' to='/appointments/new'>Create an Appointment</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/new'>Create a Technician</NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/models/">Add a Vehicle model</NavLink>
+            <li>
+              <div className="dropdown">
+                <a className="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Inventory
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/">Add a Manufacturer</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/models/">Add a Vehicle model</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/automobiles/">Add a Automobile</NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/automobiles/">Add a Automobile</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/salesperson/">Add a Salesperson</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/customer/">Add a customer</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/sale/">Record a sale</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/sales/">List sales</NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='/appointments'>List Appointments</NavLink>
+            <li>
+              <div className="dropdown">
+                <a className="btn btn-success dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sales
+                </a>
+                <ul className="dropdown-menu">
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/sales/">List sales</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/salesperson/">Add a Salesperson</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/customer/">Add a customer</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/sale/">Record a sale</NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>
