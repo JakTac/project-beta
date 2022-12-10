@@ -4,15 +4,16 @@ import DropDownCreateAppointment from './DropDownCreateAppointment'
 
 
 function SearchBar() {
-    const [appointments, setAppointments] = useState([])
+    const [vins, setVins] = useState([])
     const [filtered, setFiltered] = useState([])
-
 
     const onInputChange = event => {
         if (event.target.value.length > 0) {
-            setFiltered(appointments.filter(appointment => {
-                return appointment.vin.startsWith(event.target.value.toUpperCase())
-            }))
+            let newlyfiltered = vins.filter(vin => {
+                return vin.startsWith(event.target.value.toUpperCase())
+            })
+            const uniqueVins = [...new Set(newlyfiltered)]
+            setFiltered(uniqueVins)
         } else {
             setFiltered([])
         }
@@ -25,24 +26,17 @@ function SearchBar() {
                 return res.json()
             })
             .then(data => {
-                setAppointments(data.appointments)
+                const vins = data.appointments.map(appointment => {
+                    return appointment.vin
+                })
+                setVins(vins)
             })
     }, [])
 
 
-    const inputStyles = {
-        float: "right"
-    }
-
-    const buttonStyles = {
-        width: "100%"
-    }
-
-
-
     return (
         <>
-            {appointments &&
+            {filtered &&
                 <div>
                     <p> </p>
                     <div className='input-group mb-3'>
@@ -50,11 +44,11 @@ function SearchBar() {
                             <input type='text' className='form-control' data-bs-toggle='dropdown'
                             placeholder='Search by VIN' onChange={onInputChange} />
                             <ul className='dropdown-menu'>
-                                {filtered.map(appointment => {
+                                {filtered.map(vin => {
                                     return (
-                                        <li key={appointment.vin}>
-                                            <Link className='dropdown-item' to={`/${appointment.vin}/history/`}>
-                                            {appointment.vin}</Link>
+                                        <li key={vin}>
+                                            <Link className='dropdown-item' to={`/${vin}/history/`}>
+                                            {vin}</Link>
                                         </li>
                                     )
                                 }).slice(0, 5)
