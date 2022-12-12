@@ -33,10 +33,13 @@ function Nav() {
                     <NavLink className='dropdown-item' aria-current='page' to='/appointments/new/'>Create an Appointment</NavLink>
                   </li>
                   <li>
-                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/new/'>Create a Technician</NavLink>
+                    <hr className="dropdown-divider" />
                   </li>
                   <li>
                     <NavLink className='dropdown-item' aria-current='page' to='/technicians/'>List Technicians</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/new/'>Create a Technician</NavLink>
                   </li>
                 </ul>
               </div>
@@ -53,11 +56,17 @@ function Nav() {
                   <li>
                     <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/">List Manufacturers</NavLink>
                   </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
                   <li className="nav-item">
                     <NavLink className="dropdown-item" aria-current="page" to="/models/new/">Add a Vehicle Model</NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink className="dropdown-item" aria-current="page" to="/models/">List Vehicle Models</NavLink>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
                   </li>
                   <li className="nav-item">
                     <NavLink className="dropdown-item" aria-current="page" to="/automobiles/new/">Add a Automobile</NavLink>
