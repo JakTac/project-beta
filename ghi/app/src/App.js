@@ -7,17 +7,17 @@ import CreateAppointment from './Service/CreateAppointment'
 import ListAppointments from './Service/ListAppointments'
 import VinHistory from './Service/VinHIstory';
 import SearchBar from './Service/SearchBar';
-import ManufacturerForm from './Inventory/ManufacturerFrom';
+import ManufacturerForm from './Inventory/ManufacturerForm';
 import ModelForm from './Inventory/ModelForm';
 import AutomobileForm from './Inventory/AutomobileForm';
-import SalespersonForm from './SalespersonForm';
-import Customer1Form from './Customer1Form';
-import SaleForm from './SaleForm';
-import SalesList from './SalesList';
-import SalespersonSales from './SalespersonSales';
-import ListAutomobiles from './Inventory/ListAutomobiles';
+import SalespersonForm from './Sales/SalespersonForm';
+import Customer1Form from './Sales/Customer1Form';
+import SaleForm from './Sales/SaleForm';
+import SalesList from './Sales/SalesList';
+import SalespersonSales from './Sales/SalespersonSales';
 import ListModels from './Inventory/ListModels';
 import ListManufacturers from './Inventory/ListManufacturers';
+import ListAutomobiles from './Inventory/ListAutomobiles';
 
 function App() {
   return (

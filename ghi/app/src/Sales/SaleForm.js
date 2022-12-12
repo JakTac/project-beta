@@ -42,7 +42,6 @@ class SaleForm extends React.Component {
         delete data.autos
         delete data.salespeople
         delete data.customers
-        console.log(data);
 
         const saleUrl = 'http://localhost:8090/api/sales/'
         const fetchConfig = {
@@ -54,7 +53,6 @@ class SaleForm extends React.Component {
         };
 
         const response = await fetch(saleUrl, fetchConfig)
-        console.log(response);
         if (response.ok) {
             const newSale = await response.json();
             const automobileUrl = 'http://localhost:8090/api/autos/'

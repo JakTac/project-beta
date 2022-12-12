@@ -14,6 +14,8 @@ from sales_rest.models import AutoMobileVO
 def get_automobiles():
     response = requests.get("http://inventory-api:8000/api/automobiles/")
     content = json.loads(response.content)
+    if content['autos']:
+        print('autos received')
     for automobile in content["autos"]:
         AutoMobileVO.objects.update_or_create(
             import_href=automobile["href"],

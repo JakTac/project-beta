@@ -34,7 +34,6 @@ class Customer1Form extends React.Component {
         const data = {...this.state};
         data.phone_number = data.phoneNumber
         delete data.phoneNumber
-        console.log(data)
 
         const customer1Url = 'http://localhost:8090/api/customer/'
         const fetchConfig = {
@@ -47,8 +46,6 @@ class Customer1Form extends React.Component {
 
         const response = await fetch(customer1Url, fetchConfig)
         if (response.ok) {
-            const newCustomer = await response.json();
-            console.log(newCustomer)
 
             const cleared = {
                 name: "",
