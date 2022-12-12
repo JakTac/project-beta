@@ -35,7 +35,6 @@ class ModelForm extends React.Component {
         data.picture_url = data.pictureUrl
         delete data.pictureUrl
         delete data.manufacturers
-        console.log(data)
 
         const modelUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
@@ -48,8 +47,6 @@ class ModelForm extends React.Component {
 
         const response = await fetch(modelUrl, fetchConfig)
         if (response.ok) {
-            const newModel = await response.json();
-            console.log(newModel)
 
             const cleared = {
                 name: "",

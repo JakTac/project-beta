@@ -10,11 +10,11 @@ import SearchBar from './Service/SearchBar';
 import ManufacturerForm from './ManufacturerFrom';
 import ModelForm from './ModelForm';
 import AutomobileForm from './AutomobileForm';
-import SalespersonForm from './SalespersonForm';
-import Customer1Form from './Customer1Form';
-import SaleForm from './SaleForm';
-import SalesList from './SalesList';
-import SalespersonSales from './SalespersonSales';
+import SalespersonForm from './Sales/SalespersonForm';
+import Customer1Form from './Sales/Customer1Form';
+import SaleForm from './Sales/SaleForm';
+import SalesList from './Sales/SalesList';
+import SalespersonSales from './Sales/SalespersonSales';
 
 function App() {
   return (

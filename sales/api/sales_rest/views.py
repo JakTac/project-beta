@@ -4,63 +4,8 @@ import json
 
 from common.json import ModelEncoder
 from .models import AutoMobileVO, SalesPerson, Customer, Sale
+from .encoders import AutoMobileVODetailEncoder, SalesPersonListEncoder, SaleListEncoder, CustomerListEncoder, CustomerDetailEncoder
 
-class AutoMobileVODetailEncoder(ModelEncoder):
-    model = AutoMobileVO
-    properties = [
-        "vin",
-        "import_href",
-        "sold",
-    ]
-
-class SalesPersonListEncoder(ModelEncoder):
-    model = SalesPerson
-    properties = [
-        "name",
-        "employee_number",
-        "id",
-    ]
-
-class SalesPersonDetailEncoder(ModelEncoder):
-    model = SalesPerson
-    properties = [
-        "name",
-        "employee_number",
-        "id",
-    ]
-
-class CustomerListEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "name",
-        "phone_number",
-        "id",
-    ]
-
-class CustomerDetailEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "name",
-        "address",
-        "phone_number",
-        "id",
-    ]
-
-class SaleListEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        "automobile",
-        "salesperson",
-        "customer",
-        "price",
-        "id",
-    ]
-
-    encoders = {
-        "automobile": AutoMobileVODetailEncoder(),
-        "salesperson": SalesPersonDetailEncoder(),
-        "customer": CustomerDetailEncoder(),
-    }
 
 @require_http_methods(["GET"])
 def api_list_automobilesvo(request):
@@ -83,7 +28,7 @@ def api_list_sales_person(request):
         salesperson = SalesPerson.objects.create(**content)
         return JsonResponse(
             salesperson,
-            encoder=SalesPersonDetailEncoder,
+            encoder=SalesPersonListEncoder,
             safe=False,
         )
 
@@ -93,7 +38,7 @@ def api_show_sales_person(request, pk):
         salesperson = SalesPerson.objects.get(employee_number = pk)
         return JsonResponse(
             salesperson,
-            encoder=SalesPersonDetailEncoder,
+            encoder=SalesPersonListEncoder,
             safe=False
         )
     else:

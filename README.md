@@ -1,18 +1,24 @@
-# CarCar
+# <center>**Car Car**
 
-Team:
+<center>
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+# **Team**
+---
+**Kramer Smith** -- Service API
+**Jake Tippit** -- Sales API
+---
 
-## Design
+</center>
 
-## Service microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+<br><br>
 
-## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+# <center>**Diagram of Architecture**
+
+---
+
+<br>
+
+<p allign="center">
+    <img src="https://i.imgur.com/AaF32TL.png">
