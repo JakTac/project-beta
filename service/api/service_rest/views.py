@@ -1,9 +1,9 @@
-from django.views.decorators.http import require_http_methods
-from .encoders import AppointmentEncoder, TechnicianEncoder
-from .models import Technician, Appointment
-from django.http import JsonResponse
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 import json
+from .models import Technician, Appointment
+from .encoders import AppointmentEncoder, TechnicianEncoder
 
 
 @require_http_methods(["GET", "POST"])
@@ -68,16 +68,16 @@ def api_list_appointments(request, automobile_vo_id=None):
 
 
 @require_http_methods(["GET", "DELETE", "PUT"])
-def api_show_appointment(request, vin):
+def api_show_appointment(request, pk):
     if request.method == "GET":
-        appointment = Appointment.objects.filter(vin=vin)
+        appointment = Appointment.objects.get(id=pk)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
     elif request.method == "DELETE":
-        count, _ = Appointment.objects.filter(vin=vin).delete()
+        count, _ = Appointment.objects.filter(id=pk).delete()
         appointments = Appointment.objects.all()
         if count > 0:
             return JsonResponse(
@@ -89,10 +89,20 @@ def api_show_appointment(request, vin):
         content = json.loads(request.body)
         technician_id = content['technician']['id']
         content['technician'] = technician_id
-        Appointment.objects.filter(vin=vin).update(**content)
-        appointment = Appointment.objects.get(vin=vin)
+        Appointment.objects.filter(id=pk).update(**content)
+        appointment = Appointment.objects.get(id=pk)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
+
+
+@require_http_methods(["GET"])
+def api_appointments_by_vin(request,vin):
+    appointments = Appointment.objects.filter(vin=vin)
+    return JsonResponse(
+        appointments,
+        encoder=AppointmentEncoder,
+        safe=False,
+    )

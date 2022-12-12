@@ -32,7 +32,6 @@ function CreateTechnician (props) {
             })
             .then(result => {
                 try {
-                    console.log(result)
                     if (result.id !== undefined) {
                         window.alert("Technician was created.")
                         navigate("/technicians")

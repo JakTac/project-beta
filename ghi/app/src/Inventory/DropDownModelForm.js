@@ -54,7 +54,6 @@ class DropDownModelForm extends React.Component {
         const response = await fetch(modelUrl, fetchConfig)
         if (response.ok) {
             const newModel = await response.json();
-            console.log(newModel)
 
             const cleared = {
                 name: "",
