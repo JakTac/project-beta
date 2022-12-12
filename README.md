@@ -35,7 +35,7 @@
 ---
 ### **Appointment Model** -- (used to create an appointment)
 
->When creating an appointment the following properties are required: "customer", "date", "time", "reason", "vin" and "technician" which is a foreign key of the Technician Model. 
+>When creating an appointment the following properties are required: "customer", "date", "time", "reason", "vin" and "technician" which is a foreign key of the Technician Model.
 
 
 | **MODEL FIELD** | **FIELD TYPE** | **OTHER ARGS**                             |
@@ -64,7 +64,7 @@
 
 ### **AutomobileVO Model** -- (Used to create a separate instance of automobiles)
 
->This model is a value object that is used for polling the inventory api. We have it set so every 20 seconds the inventory api sends their automobile data to the service microservice. The service microservice then takes that data and either creates or updates the automobile as a separate instance in the form of AutomobileVO. 
+>This model is a value object that is used for polling the inventory api. We have it set so every 20 seconds the inventory api sends their automobile data to the service microservice. The service microservice then takes that data and either creates or updates the automobile as a separate instance in the form of AutomobileVO.
 
 | **MODEL FIELD** |       **FIELD TYPE**        | **OTHER ARGS**               |
 | :-------------: | :-------------------------: | :--------------------------- |
@@ -86,7 +86,6 @@
 | **REQUEST METHOD** |                     **FUNCTION**                      |                     **ENDPOINT**                     |
 | :----------------: | :---------------------------------------------------: | :--------------------------------------------------: |
 |       `GET`        |                   list appointments                   |       http://localhost:8080/api/appointments/        |
-|       `GET`        |      list appointments for that vin                   |       http://localhost:8080/api/appointments/:pk/    |
 |       `POST`       |                  create appointment                   |       http://localhost:8080/api/appointments/        |
 |      `DELETE`      |                  delete appointment                   |       http://localhost:8080/api/appointments/:pk/    |
 |       `PUT`        | update appointment's <br>"completed" property to True |       http://localhost:8080/api/appointments/:pk/    |
@@ -102,6 +101,10 @@
 
 <br>
 
+### **Apointments by VIN :**
+| **REQUEST METHOD** |                     **FUNCTION**                      |                     **ENDPOINT**                     |
+| :----------------: | :---------------------------------------------------: | :--------------------------------------------------: |
+|       `GET`        |      list appointments for that vin                   |       http://localhost:8080/api/:vin/appointments/   |
 # <center>**Sales Microservice**
 ---
 
@@ -111,7 +114,7 @@
 
 ### **AutomobileVO Model** -- (Used to create a separate instance of automobiles)
 
->This model is a value object that is used for polling the inventory api. We have it set so every 20 seconds the inventory api sends their automobile data to the service microservice. The service microservice then takes that data and either creates or updates the automobile as a separate instance in the form of AutomobileVO. 
+>This model is a value object that is used for polling the inventory api. We have it set so every 20 seconds the inventory api sends their automobile data to the service microservice. The service microservice then takes that data and either creates or updates the automobile as a separate instance in the form of AutomobileVO.
 
 | **MODEL FIELD** |       **FIELD TYPE**        | **OTHER ARGS**               |
 | :-------------: | :-------------------------: | :--------------------------- |
