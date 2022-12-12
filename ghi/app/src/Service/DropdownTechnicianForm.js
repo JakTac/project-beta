@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 function DropDownCreateTechnician(props) {
     let navigate = useNavigate()
     const initialState = {
@@ -9,6 +10,7 @@ function DropDownCreateTechnician(props) {
     }
     const [details, setDetails] = useState(initialState)
 
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setDetails((prev) => {
@@ -16,9 +18,9 @@ function DropDownCreateTechnician(props) {
         })
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(details)
         const techniciansUrl = 'http://localhost:8080/api/technicians/'
         const requestOptions = {
             method: "POST",
@@ -30,7 +32,6 @@ function DropDownCreateTechnician(props) {
             })
             .then(result => {
                 try {
-                    console.log(result)
                     if (JSON.stringify(result).id != undefined > 0) {
                         window.alert("Technician was created.")
                         navigate("/technicians")
@@ -42,6 +43,7 @@ function DropDownCreateTechnician(props) {
                 }
             })
     }
+
 
     return (
         <>

@@ -22,9 +22,11 @@ function ListTechnicians() {
         right: "20px",
     }
 
+
     const tableStyles = {
         paddingTop: "30px"
     }
+
 
     return (
         <>

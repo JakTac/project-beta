@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import SearchBar from './SearchBar'
 
+
 function VinHistory() {
     const [appointments, setAppointments] = useState(null)
     const vipStatus = appointments && appointments[0].vip ? "VIP" : ""
