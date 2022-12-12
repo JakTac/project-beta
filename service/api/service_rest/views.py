@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
-from .models import Technician, Appointment, AutomobileVO, AppointmentHistory
+from .models import Technician, Appointment, AutomobileVO
 
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -136,15 +136,6 @@ def api_show_appointment(request, pk):
 @require_http_methods(["GET"])
 def api_appointments_by_vin(request,vin):
     appointments = Appointment.objects.filter(vin=vin)
-    return JsonResponse(
-        appointments,
-        encoder=AppointmentEncoder,
-        safe=False,
-    )
-
-@require_http_methods(["GET"])
-def api_appointment_history(request,vin):
-    appointments = AppointmentHistory.objects.filter(vin=vin)
     return JsonResponse(
         appointments,
         encoder=AppointmentEncoder,
