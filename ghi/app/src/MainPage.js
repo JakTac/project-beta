@@ -1,4 +1,4 @@
-import ListAutomobiles from "./ListAutomobiles";
+import ListAutomobiles from "./Inventory/ListAutomobiles";
 
 function MainPage() {
   return (

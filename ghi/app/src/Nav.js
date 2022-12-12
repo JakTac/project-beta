@@ -27,16 +27,16 @@ function Nav() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink className='dropdown-item' aria-current='page' to='/appointments'>List Appointments</NavLink>
+                    <NavLink className='dropdown-item' aria-current='page' to='/appointments/'>List Appointments</NavLink>
                   </li>
                   <li>
-                    <NavLink className='dropdown-item' aria-current='page' to='/appointments/new'>Create an Appointment</NavLink>
+                    <NavLink className='dropdown-item' aria-current='page' to='/appointments/new/'>Create an Appointment</NavLink>
                   </li>
                   <li>
-                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/new'>Create a Technician</NavLink>
+                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/new/'>Create a Technician</NavLink>
                   </li>
                   <li>
-                    <NavLink className='dropdown-item' aria-current='page' to='/technicians'>List Technicians</NavLink>
+                    <NavLink className='dropdown-item' aria-current='page' to='/technicians/'>List Technicians</NavLink>
                   </li>
                 </ul>
               </div>
@@ -48,13 +48,22 @@ function Nav() {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/">Add a Manufacturer</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/new/">Add a Manufacturer</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/">List Manufacturers</NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink className="dropdown-item" aria-current="page" to="/models/">Add a Vehicle model</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="dropdown-item" aria-current="page" to="/automobiles/">Add a Automobile</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/models/new/">List Vehicle Models</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/automobiles/new/">Add a Automobile</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="dropdown-item" aria-current="page" to="/automobiles/">List Automobiles</NavLink>
                   </li>
                 </ul>
               </div>
