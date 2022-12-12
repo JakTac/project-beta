@@ -32,7 +32,7 @@ function CreateTechnician (props) {
             })
             .then(result => {
                 try {
-                    if (JSON.stringify(result).id != undefined > 0) {
+                    if (JSON.stringify(result).id !== undefined) {
                         window.alert("Technician was created.")
                         navigate("/technicians")
                     } else {

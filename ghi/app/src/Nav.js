@@ -54,10 +54,10 @@ function Nav() {
                     <NavLink className="dropdown-item" aria-current="page" to="/manufacturers/">List Manufacturers</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="dropdown-item" aria-current="page" to="/models/">Add a Vehicle model</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/models/new/">Add a Vehicle Model</NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="dropdown-item" aria-current="page" to="/models/new/">List Vehicle Models</NavLink>
+                    <NavLink className="dropdown-item" aria-current="page" to="/models/">List Vehicle Models</NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink className="dropdown-item" aria-current="page" to="/automobiles/new/">Add a Automobile</NavLink>

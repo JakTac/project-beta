@@ -18,7 +18,7 @@ function VinHistory() {
             .then(data => {
                 setAppointments(data)
             })
-    }, [])
+    }, [stringVin])
 
 
     return (
