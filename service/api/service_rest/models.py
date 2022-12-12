@@ -33,20 +33,3 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.customer} - {self.date} - {self.time}"
-
-
-class AppointmentHistory(models.Model):
-    customer = models.CharField(max_length=50)
-    date = models.DateField(auto_now_add=False, null=True)
-    time = models.TimeField(auto_now_add=False, null=True)
-    reason = models.CharField(max_length=250)
-    vip = models.BooleanField(default=False)
-    vin = models.CharField(max_length=17, null=True)
-    technician = models.ForeignKey(
-        Technician,
-        related_name="appointmentHistory",
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return f"{self.owner} - {self.date} - {self.time}"
