@@ -1,44 +1,9 @@
-from django.shortcuts import render
-from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from .encoders import AppointmentEncoder, TechnicianEncoder
+from .models import Technician, Appointment
+from django.http import JsonResponse
+from django.shortcuts import render
 import json
-from common.json import ModelEncoder
-from .models import Technician, Appointment, AutomobileVO
-
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "import_href",
-    ]
-
-
-class TechnicianEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "id",
-        "name",
-        "employee_number",
-    ]
-
-
-class AppointmentEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "id",
-        "vin",
-        "vip",
-        "date",
-        "time",
-        "reason",
-        "customer",
-        "completed",
-        "technician",
-    ]
-    encoders = {
-        "technician": TechnicianEncoder(),
-    }
 
 
 @require_http_methods(["GET", "POST"])
@@ -103,16 +68,16 @@ def api_list_appointments(request, automobile_vo_id=None):
 
 
 @require_http_methods(["GET", "DELETE", "PUT"])
-def api_show_appointment(request, pk):
+def api_show_appointment(request, vin):
     if request.method == "GET":
-        appointment = Appointment.objects.get(id=pk)
+        appointment = Appointment.objects.filter(vin=vin)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
     elif request.method == "DELETE":
-        count, _ = Appointment.objects.filter(id=pk).delete()
+        count, _ = Appointment.objects.filter(vin=vin).delete()
         appointments = Appointment.objects.all()
         if count > 0:
             return JsonResponse(
@@ -124,20 +89,10 @@ def api_show_appointment(request, pk):
         content = json.loads(request.body)
         technician_id = content['technician']['id']
         content['technician'] = technician_id
-        Appointment.objects.filter(id=pk).update(**content)
-        appointment = Appointment.objects.get(id=pk)
+        Appointment.objects.filter(vin=vin).update(**content)
+        appointment = Appointment.objects.get(vin=vin)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
-
-
-@require_http_methods(["GET"])
-def api_appointments_by_vin(request,vin):
-    appointments = Appointment.objects.filter(vin=vin)
-    return JsonResponse(
-        appointments,
-        encoder=AppointmentEncoder,
-        safe=False,
-    )
