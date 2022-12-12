@@ -32,7 +32,7 @@ function DropDownCreateTechnician(props) {
             })
             .then(result => {
                 try {
-                    if (JSON.stringify(result).id != undefined > 0) {
+                    if (result.id !== undefined) {
                         window.alert("Technician was created.")
                         navigate("/technicians")
                     } else {
