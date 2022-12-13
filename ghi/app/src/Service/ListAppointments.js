@@ -68,7 +68,7 @@ function ListAppointments() {
 
     return (
         <>
-            <SearchBar />
+            <SearchBar appointments={appointments} setAppointments={setAppointments} />
             {appointments &&
                 <div>
                     <table className="table">

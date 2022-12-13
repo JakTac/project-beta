@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AlertMessage from './Modal/AlertMessage'
 
 function CreateAppointment () {
-    let navigate = useNavigate()
 
 
     const initialState = {
@@ -20,6 +20,7 @@ function CreateAppointment () {
     const [details, setDetails] = useState(initialState)
     const [technicians, setTechnicians] = useState(null)
     const [automobiles, setAutomobiles] = useState(null)
+    const [activeAlert, setActiveAlert] = useState(false)
 
 
     useEffect(() => {
@@ -76,8 +77,7 @@ function CreateAppointment () {
         .then(result => {
             try {
                 if (result.id !== undefined) {
-                    window.alert("Appointment was created.")
-                    navigate("/appointments")
+                    setActiveAlert(true)
                 } else {
                     window.alert("Something went wrong. Appointment was not created.")
                 }
@@ -112,7 +112,7 @@ function CreateAppointment () {
                                 <label htmlFor="date">Date</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handleChange} placeholder="time" min="09:00" max="17:00"
+                                <input onChange={handleChange} placeholder="Time" min="09:00" max="17:00"
                                 required type="time" name="time" id="time" className="form-control" />
                                 <label htmlFor="time">Time (Can schedule from 9am to 5pm)</label>
                             </div>
@@ -122,7 +122,8 @@ function CreateAppointment () {
                                 <label htmlFor="reason">Reason for visit</label>
                             </div>
                             <div className="mb-3">
-                                <select onChange={handleChange} required id="technician" name="technician" className="form-select">
+                                <select onChange={handleChange} required id="technician" name="technician"
+                                className="form-select">
                                     <option value="">Choose a technician</option>
                                     {technicians.map(technician => {
                                         return (
@@ -138,6 +139,7 @@ function CreateAppointment () {
                     </div>
                 </div>
             </div>}
+            <AlertMessage activeAlert={activeAlert} setActiveAlert={setActiveAlert} />
         </>
     )
 

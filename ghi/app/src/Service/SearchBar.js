@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import DropDownCreateAppointment from './DropDownCreateAppointment'
 
 
-function SearchBar() {
+function SearchBar({appointments, setAppointments}) {
     const [vins, setVins] = useState([])
     const [filtered, setFiltered] = useState([])
 
@@ -58,7 +58,7 @@ function SearchBar() {
                         <div className='dropdown'>
                             <button type="button" className="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false" data-bs-auto-close="outside">Create an Appointment</button>
-                            <DropDownCreateAppointment />
+                            <DropDownCreateAppointment appointments={appointments} setAppointments={setAppointments}/>
                         </div>
                     </div>
                 </div>

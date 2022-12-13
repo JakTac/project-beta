@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 
-function DropDownCreateAppointment(props) {
-
+function DropDownCreateAppointment({appointments, setAppointments}) {
+    let navigate = useNavigate()
 
     const initialState = {
         vin: '',
@@ -76,7 +77,10 @@ function DropDownCreateAppointment(props) {
             .then(result => {
                 try {
                     if (result.id !== undefined) {
+                        const newAppointment = result
                         window.alert("Appointment was created.")
+                        setAppointments([...appointments, newAppointment])
+                        // navigate("/appointments")
                     } else {
                         window.alert("Something went wrong. Appointment was not created.")
                     }
@@ -137,7 +141,6 @@ function DropDownCreateAppointment(props) {
                     <div>
                         <button className="btn btn-primary">Create</button>
                     </div>
-
                 </form>
             }
         </>
